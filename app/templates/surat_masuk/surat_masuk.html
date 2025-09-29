@@ -1,0 +1,31 @@
+{% extends ""layouts/base-dashboard.html"" %}
+
+{% block title %}Daftar Surat{% endblock %}
+
+{% block content %}
+    <h2>Daftar Surat Masuk</h2>
+    <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nomor Surat</th>
+                <th>Pengirim</th>
+                <th>Perihal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in surat %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ s.nomor_surat }}</td>
+                <td>{{ s.pengirim }}</td>
+                <td>{{ s.perihal }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4">Belum ada surat masuk</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

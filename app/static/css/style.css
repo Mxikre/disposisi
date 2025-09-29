@@ -1,0 +1,86 @@
+/* ===================== */
+/* Global Style          */
+/* ===================== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f6fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* Judul halaman */
+.page-title {
+    color: #2c3e50;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* ===================== */
+/* Navbar                */
+/* ===================== */
+.navbar {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* ===================== */
+/* Login Page            */
+/* ===================== */
+.login-page {
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.login-card .card-header {
+    background: #2c3e50;
+    color: white;
+    font-weight: bold;
+}
+
+/* ===================== */
+/* Dashboard             */
+/* ===================== */
+.card {
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.card-header {
+    font-weight: bold;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+/* ===================== */
+/* Button                */
+/* ===================== */
+.btn-primary {
+    background-color: #2c3e50;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #1a242f;
+}
+
+.btn-outline-danger:hover {
+    background-color: #c0392b;
+    color: white;
+}

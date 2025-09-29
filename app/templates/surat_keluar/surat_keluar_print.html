@@ -1,0 +1,82 @@
+{% extends "layouts/base-dashboard.html" %}
+
+{% block title %}Cetak Surat Keluar{% endblock %}
+
+{% block stylesheets %}
+<style>
+  /* Gaya cetak sederhana */
+  .letter {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    background: #fff;
+  }
+  .letter .header { text-align: center; margin-bottom: 20px; }
+  .letter .meta { margin-bottom: 20px; }
+  .letter .meta td { vertical-align: top; padding: 2px 8px; }
+  @media print {
+    body * { visibility: hidden; }
+    .letter, .letter * { visibility: visible; }
+    .letter { position: absolute; left: 0; top: 0; width: 100%; }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="letter">
+  <div class="header">
+    <h5>Nama Instansi / Perusahaan Anda</h5>
+    <div>Alamat Instansi · Telepon · Email · Website</div>
+    <hr>
+  </div>
+
+  <table class="meta mb-3">
+    <tr>
+      <td><strong>Nomor</strong></td>
+      <td>: {{ surat.nomor_surat }}</td>
+    </tr>
+    <tr>
+      <td><strong>Tanggal</strong></td>
+      <td>: {{ surat.tanggal.strftime('%d %B %Y') if surat.tanggal else '' }}</td>
+    </tr>
+    <tr>
+      <td><strong>Kepada</strong></td>
+      <td>: {{ surat.kepada }}</td>
+    </tr>
+    <tr>
+      <td><strong>Perihal</strong></td>
+      <td>: {{ surat.perihal }}</td>
+    </tr>
+  </table>
+
+  <div class="mb-4">
+    {{ surat.isi | nl2br }}
+  </div>
+
+  <div class="row">
+    <div class="col-6"></div>
+    <div class="col-6 text-center">
+      <div>{{ surat.kota if surat.kota else '—' }}, {{ surat.tanggal.strftime('%d %B %Y') if surat.tanggal else '' }}</div>
+      <div class="mt-4">Hormat kami,</div>
+      <div class="mt-5"><strong>{{ surat.penandatangan }}</strong></div>
+      <div>{{ surat.jabatan_penandatangan }}</div>
+    </div>
+  </div>
+
+  {% if surat.file_scan %}
+  <div class="mt-4">
+    <small>Lampiran: <a href="{{ url_for('static', filename='uploads/' ~ surat.file_scan) }}" target="_blank">Lihat file</a></small>
+  </div>
+  {% endif %}
+
+  <div class="mt-3 text-end">
+    <button class="btn btn-sm btn-secondary" onclick="window.print()">Cetak</button>
+    <a href="{{ url_for('main.surat_keluar') }}" class="btn btn-sm btn-outline-primary">Kembali</a>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- helper filter nl2br jika belum ada bisa definisikan di app (lihat catatan) -->
+{% endblock %}

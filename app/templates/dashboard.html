@@ -1,0 +1,104 @@
+{% extends "layouts/base-dashboard.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block stylesheets %}
+  <!-- Tambahin CSS khusus dashboard di sini -->
+{% endblock stylesheets %}
+
+ <!-- Card Statistik -->
+  <div class="row">
+    <!-- Total Surat Masuk -->
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-body p-3">
+          <div class="row">
+            <div class="col-8">
+              <div class="numbers">
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Surat Masuk</p>
+                <h5 class="font-weight-bolder mb-0">
+                  {{ total_surat_masuk }}
+                </h5>
+              </div>
+            </div>
+            <div class="col-4 text-end">
+              <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                <i class="bi bi-envelope-fill text-white"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Total Surat Keluar -->
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-body p-3">
+          <div class="row">
+            <div class="col-8">
+              <div class="numbers">
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Surat Keluar</p>
+                <h5 class="font-weight-bolder mb-0">
+                  {{ total_surat_keluar }}
+                </h5>
+              </div>
+            </div>
+            <div class="col-4 text-end">
+              <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
+                <i class="bi bi-send-fill text-white"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabel Surat Masuk Terbaru -->
+  <div class="row mt-4">
+    <div class="col-lg-12 col-md-12 mb-md-0 mb-4">
+      <div class="card">
+        <div class="card-header pb-0">
+          <h6>5 Surat Masuk Terbaru</h6>
+        </div>
+        <div class="card-body px-0 pb-2">
+          <div class="table-responsive">
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Nomor Surat</th>
+                  <th>Pengirim</th>
+                  <th>Perihal</th>
+                  <th>Tanggal</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for s in surat_terbaru %}
+                <tr>
+                  <td>{{ loop.index }}</td>
+                  <td>{{ s.nomor_surat }}</td>
+                  <td>{{ s.pengirim }}</td>
+                  <td>{{ s.perihal }}</td>
+                  <td>{{ s.tanggal.strftime('%d-%m-%Y') if s.tanggal else '-' }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                  <td colspan="5" class="text-center">Belum ada surat masuk</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock content %}
+
+{% block javascripts %}
+  <!-- Tambahin JS khusus dashboard di sini -->
+{% endblock javascripts %}

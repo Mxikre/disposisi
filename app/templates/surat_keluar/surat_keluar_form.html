@@ -1,0 +1,64 @@
+{% extends "layouts/base-dashboard.html" %}
+
+{% block title %}{{ 'Edit' if surat else 'Tambah' }} Surat Keluar{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title mb-3">{{ 'Edit' if surat else 'Tambah' }} Surat Keluar</h4>
+
+    <form action="{{ action_url }}" method="post" enctype="multipart/form-data">
+      {{ form.csrf_token() if form is defined }} <!-- jika pake WTForms -->
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Nomor Surat</label>
+          <input name="nomor_surat" class="form-control" value="{{ surat.nomor_surat if surat else '' }}" required>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Tanggal</label>
+          <input name="tanggal" type="date" class="form-control" value="{{ surat.tanggal.isoformat() if surat and surat.tanggal else '' }}" required>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label">Kepada / Tujuan</label>
+          <input name="kepada" class="form-control" value="{{ surat.kepada if surat else '' }}" required>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label">Perihal</label>
+          <input name="perihal" class="form-control" value="{{ surat.perihal if surat else '' }}" required>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label">Isi Surat</label>
+          <textarea name="isi" rows="6" class="form-control">{{ surat.isi if surat else '' }}</textarea>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Nama Penandatangan</label>
+          <input name="penandatangan" class="form-control" value="{{ surat.penandatangan if surat else '' }}">
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Jabatan Penandatangan</label>
+          <input name="jabatan_penandatangan" class="form-control" value="{{ surat.jabatan_penandatangan if surat else '' }}">
+        </div>
+
+        <div class="col-12">
+          <label class="form-label">File Lampiran / Scan (opsional)</label>
+          <input name="file_scan" type="file" class="form-control">
+          {% if surat and surat.file_scan %}
+            <small class="text-muted">File saat ini: <a href="{{ url_for('static', filename='uploads/' ~ surat.file_scan) }}" target="_blank">{{ surat.file_scan }}</a></small>
+          {% endif %}
+        </div>
+
+        <div class="col-12 text-end">
+          <a href="{{ url_for('main.surat_keluar') }}" class="btn btn-outline-secondary">Batal</a>
+          <button type="submit" class="btn btn-primary">{{ 'Simpan Perubahan' if surat else 'Simpan' }}</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

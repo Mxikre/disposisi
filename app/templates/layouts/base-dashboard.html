@@ -1,0 +1,67 @@
+{% extends "layouts/base.html" %}
+
+{% block body %}
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container">
+            <!-- Brand -->
+            <a class="navbar-brand d-flex align-items-center" href="{{ url_for('main.index') }}">
+                <i class="bi bi-envelope-fill text-primary fs-3 me-2"></i>
+                <span class="fw-bold">Disposisi Surat</span>
+            </a>
+
+            <!-- Toggle button for mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-3">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'main.index' %}active{% endif %}" href="{{ url_for('main.index') }}">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'main.surat_masuk' %}active{% endif %}" href="{{ url_for('main.surat_masuk') }}">Surat Masuk</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'main.surat_keluar' %}active{% endif %}" href="{{ url_for('main.surat_keluar') }}">Surat Keluar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'main.instansi' %}active{% endif %}" href="{{ url_for('main.instansi') }}">Instansi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'main.summary' %}active{% endif %}" href="{{ url_for('main.summary') }}">Summary</a>
+                    </li>
+                </ul>
+
+                <!-- Jika user login, tampilkan tombol logout -->
+                <ul class="navbar-nav ms-auto">
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="btn btn-outline-danger ms-2" href="{{ url_for('auth.logout') }}">
+                            <i class="bi bi-box-arrow-right"></i> Logout
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary ms-2" href="{{ url_for('auth.login') }}">
+                            <i class="bi bi-box-arrow-in-right"></i> Login
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Konten Utama -->
+    <main class="container my-4">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center py-3 border-top mt-auto">
+        <p class="mb-0">&copy; 2025 Aplikasi Disposisi Surat</p>
+    </footer>
+{% endblock %}
