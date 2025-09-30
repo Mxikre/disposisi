@@ -19,9 +19,6 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-3">
                     <li class="nav-item">
-                        <a class="nav-link {% if request.endpoint == 'main.index' %}active{% endif %}" href="{{ url_for('main.index') }}">Beranda</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link {% if request.endpoint == 'main.surat_masuk' %}active{% endif %}" href="{{ url_for('main.surat_masuk') }}">Surat Masuk</a>
                     </li>
                     <li class="nav-item">
